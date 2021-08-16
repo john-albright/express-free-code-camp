@@ -35,6 +35,11 @@ app.get("/:word/echo", (req, res) => {
     res.json({"echo": req.params.word});
 });
 
+// Serve an object with the values of first and last keys of a query parameter input
+app.get("/name", (req, res) => {
+    res.json({"name": `${req.query.first} ${req.query.last}`});
+});
+
 // Mount the middleware to serve the styles sheet in the public folder
 app.use("/public", express.static(__dirname + "/public"));
 
