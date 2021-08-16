@@ -8,7 +8,11 @@ app.get("/", (req, res) => {
 
 // Serve an object as a response to the GET requests to the json route
 app.get("/json", (req, res) => {
-    res.json({"message":"Hello json"})
+    if (process.env.MESSAGE_STYLE == "uppercase") {
+        res.json({"message":"HELLO JSON"})
+    } else {
+        res.json({"message":"Hello json"})
+    }
 });
 
 // Mount the middleware to serve the styles sheet in the public folder
