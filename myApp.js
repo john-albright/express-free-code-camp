@@ -21,13 +21,18 @@ app.get("/json", (req, res) => {
     }
 });
 
-// Serve an object with the current time as a response to the GET requests to the json route
+// Serve an object with the current time as a response to the GET requests to the now route
 // Chain a middleware function and the final handler
 app.get("/now", (req, res, next) => {
     req.time = new Date().toString();
     next();
 }, (req, res) => {
     res.send({"time":req.time});
+});
+
+// Serve an object with an echo of a word in the path before "/echo"
+app.get("/:word/echo", (req, res) => {
+    res.json({"echo": req.params.word});
 });
 
 // Mount the middleware to serve the styles sheet in the public folder
