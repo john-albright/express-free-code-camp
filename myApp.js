@@ -1,5 +1,12 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+
+// Mount the middleware body-parser to handle encoded data
+app.use(bodyParser.urlencoded({extended: false}));
+
+// Parse the json data sent in the POST request
+app.use(bodyParser.json());
 
 // Print to the console information about each request made
 app.use((req, res, next) => {
@@ -35,7 +42,7 @@ app.get("/:word/echo", (req, res) => {
     res.json({"echo": req.params.word});
 });
 
-// Serve an object with the values of first and last keys of a query parameter input
+// Serve an object with the values of keys "first" and "last" of a query parameter input
 app.get("/name", (req, res) => {
     res.json({"name": `${req.query.first} ${req.query.last}`});
 });
