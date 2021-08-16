@@ -21,6 +21,15 @@ app.get("/json", (req, res) => {
     }
 });
 
+// Serve an object with the current time as a response to the GET requests to the json route
+// Chain a middleware function and the final handler
+app.get("/now", (req, res, next) => {
+    req.time = new Date().toString();
+    next();
+}, (req, res) => {
+    res.send({"time":req.time});
+});
+
 // Mount the middleware to serve the styles sheet in the public folder
 app.use("/public", express.static(__dirname + "/public"));
 
