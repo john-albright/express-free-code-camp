@@ -1,6 +1,12 @@
 var express = require('express');
 var app = express();
 
+// Print to the console information about each request made
+app.use((req, res, next) => {
+    console.log(req.method + " " + req.path + " - " + req.ip);
+    next();
+});
+
 // Send the index.html file to the root path 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/views/index.html")
