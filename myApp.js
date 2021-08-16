@@ -42,16 +42,12 @@ app.get("/:word/echo", (req, res) => {
     res.json({"echo": req.params.word});
 });
 
-// Serve an object with the values of keys "first" and "last" of a query parameter input
-app.get("/name", (req, res) => {
+// Serve an object with the first and last name as a response to the GET & POST requestes to the route name
+app.route("/name").get((req, res) => {
     res.json({"name": `${req.query.first} ${req.query.last}`});
-});
-
-// Serve an object as a response to the POST requests to the name route
-// The object should extract the "first" and "last" input values on the form of the index page
-app.post("/name", (req,res) => {
+}).post("/name", (req,res) => {
     res.json({"name": `${req.body.first} ${req.body.last}`});
-});
+});;
 
 // Mount the middleware to serve the styles sheet in the public folder
 app.use("/public", express.static(__dirname + "/public"));
